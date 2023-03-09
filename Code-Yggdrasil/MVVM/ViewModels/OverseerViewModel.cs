@@ -13,8 +13,6 @@ namespace Code_Yggdrasil.MVVM.ViewModels
 
 
         public OverseerViewModel()
-        {
-
-        }
+    {
     }
 }
