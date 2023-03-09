@@ -1,0 +1,122 @@
+﻿<Window x:Class="Code_Yggdrasil.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Code_Yggdrasil"
+        mc:Ignorable="d"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent"
+        Title="MainWindow" Height="580" Width="920">
+
+    <Window.Resources>
+        <LinearGradientBrush x:Key="BottomFadeMask"
+                             StartPoint="0.5,1" EndPoint=".5, 0">
+            <GradientStop Color="Black" Offset="-.5"/>
+            <GradientStop Color="Transparent" Offset=".8"/>
+        </LinearGradientBrush>
+        
+    </Window.Resources>
+    
+    <!--    FULL WINDOW         -->
+    <Grid MouseDown="Grid_MouseDown">
+        
+        <!--    BACKGROUND BORDER   -->
+        <Border Background="{StaticResource Darker}" CornerRadius="10"
+                BorderBrush="{StaticResource Theme}" BorderThickness="2"/>
+        
+        <!--    CONTENT HOLDER      -->
+        <Grid Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="62"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--    SIDE BAR    -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="120"/>
+                </Grid.RowDefinitions>
+
+                <!--    Back Border -->
+                <Border Grid.Row="0" Grid.RowSpan="5"
+                        Background="{StaticResource Darker}" 
+                        CornerRadius="10 0 0 10"
+                        BorderThickness="0 0 2 0"
+                        BorderBrush="{StaticResource Theme}"/>
+
+                <!--    Logo    -->
+                <Image Grid.Row="1" Margin="2" Source="pack://application:,,,/Resources/Images/Yggdrasil-Logo.png"/>
+
+                <!--    Navigation Bar  -->
+                <StackPanel Grid.Row="2" Orientation="Vertical" Margin="0 20 0 20"
+                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                            Height="Auto" Width="Auto">
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" IsChecked="True">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Dashboard-Logo.png"/>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource MenuButtonTheme}">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Project-Logo.png"/>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource MenuButtonTheme}">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Calendar-Logo.png"/>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource MenuButtonTheme}">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/ToDo-Logo.png"/>
+                    </RadioButton>
+                    
+                    <RadioButton Style="{StaticResource MenuButtonTheme}">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Asset-Logo.png"/>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}">
+                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Profiles-Logo.png"/>
+                    </RadioButton>
+                </StackPanel>
+            
+                <!--    Utility Buttons -->
+                <StackPanel Grid.Row="4">
+                    <Button Height="Auto" Style="{StaticResource MenuButtonTheme-1}">
+                        <Image Height="40" Source="pack://application:,,,/Resources/Images/Minimise-Logo.png"/>
+                    </Button>
+                    <Button Height="Auto" Style="{StaticResource MenuButtonTheme-1}" Click="Off_Button_Click">
+                        <Image Height="40" Source="pack://application:,,,/Resources/Images/On-Off-Logo.png"/>
+                    </Button>
+                </StackPanel>
+                
+
+                <!--    SideBar Button -->
+            </Grid>
+        
+            <!--    POP UP BAR  -->
+            <Grid Grid.Column="1">
+                <Border Background="{StaticResource Darker}"
+                        BorderThickness="0 0 2 0" BorderBrush="{StaticResource Theme}">
+                    
+                </Border>
+            </Grid>
+            
+            <!--    CONTENT PAGE    -->
+            <Grid Grid.Column="2" Margin="0 4 4 4">
+                <Border Background="{StaticResource Midtone}" CornerRadius="0 10 10 0"/>
+                <UserControl></UserControl>
+            </Grid>
+        </Grid>
+
+        <!--    GRADIENT BOTTOM -->
+        <Border Height="80" VerticalAlignment="Bottom" IsHitTestVisible="False"
+                Background="Black"
+                OpacityMask="{StaticResource BottomFadeMask}"
+                CornerRadius="0 0 10 10"
+                Margin="2"/>
+    </Grid>
+</Window>
