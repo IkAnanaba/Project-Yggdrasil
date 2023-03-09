@@ -5,8 +5,10 @@
     <!--    Navigation Buttons-->
     <Style TargetType="{x:Type RadioButton}"
            x:Key="MenuButtonTheme">
-
+        
         <Style.Setters>
+            <Setter Property="Command" Value="{Binding Navigate}"/>
+            <Setter Property="Background" Value="{StaticResource Theme}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
@@ -25,9 +27,10 @@
                                     VerticalAlignment="Stretch"
                                     Visibility="Visible"/>
 
-                            <ContentPresenter Content="{TemplateBinding Content}"
-                                              Height="{TemplateBinding Height}"/>
-
+                            <ContentPresenter Content="{TemplateBinding Content}">
+                                
+                            </ContentPresenter>
+                        
                             <Border Background="{StaticResource Theme}" Opacity=".1"
                                     CornerRadius="15 0 0 15" Margin="5 2 0 2"
                                     x:Name="ButtonCover"/>
@@ -86,8 +89,8 @@
 
     <!--    Utility Buttons-->
     <Style TargetType="{x:Type Button}"  x:Key="MenuButtonTheme-1">
-
         <Style.Setters>
+            <Setter Property="Background" Value="{StaticResource Theme}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
@@ -122,12 +125,13 @@
     </Style>
     
     <!--    Pop up button-->
-    <Style TargetType="{x:Type ToggleButton}"  x:Key="PopupButtonTheme">
+    <Style TargetType="{x:Type Button}"  x:Key="PopupButtonTheme">
 
         <Style.Setters>
+            <Setter Property="Background" Value="{StaticResource Theme}"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Height="Auto"
                               Width="Auto">
 
@@ -136,18 +140,49 @@
 
                             <ContentPresenter Content="{TemplateBinding Content}"
                                               Height="{TemplateBinding Height}" 
-                                              VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center" RenderTransformOrigin=".5 .5">
+                                <ContentPresenter.RenderTransform>
+                                    <ScaleTransform x:Name="contentScaleX" ScaleX="1"/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
 
                             <Border/>
                         </Grid>
 
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Margin" Value="40 2 8 2"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
+                            <DataTrigger Binding="{Binding popUpBarWidth}" Value="2">
+
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                Duration="0:0:0.2"
+                                                                From="40, 2, 8, 2"
+                                                                To="8, 2, 40, 2"/>
+                                            <DoubleAnimation Storyboard.TargetName="contentScaleX"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             From="-1" To="1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                                
+                                <DataTrigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                Duration="0:0:0.2"
+                                                                From="8, 2, 40, 2"
+                                                                To="40, 2, 8, 2"/>
+                                            <DoubleAnimation Storyboard.TargetName="contentScaleX"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             From="1" To="-1" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.ExitActions>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding popUpBarWidth}" Value="180">
                                 <Setter Property="Margin" Value="8 2 40 2"/>
-                            </Trigger>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
 
                     </ControlTemplate>
@@ -161,4 +196,5 @@
 
     </Style>
 
+    
 </ResourceDictionary>

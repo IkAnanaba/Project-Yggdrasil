@@ -17,7 +17,7 @@
     <None Remove="Resources\Images\Pop-Up-Bar-Logo.png" />
     <None Remove="Resources\Images\Profiles-Logo.png" />
     <None Remove="Resources\Images\Project-Logo.png" />
-    <None Remove="Resources\Images\Settings Logo.png" />
+    <None Remove="Resources\Images\Settings-Logo.png" />
     <None Remove="Resources\Images\ToDo-Logo.png" />
     <None Remove="Resources\Images\Yggdrasil-Logo.png" />
   </ItemGroup>
@@ -47,7 +47,7 @@
     <Resource Include="Resources\Images\Project-Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Images\Settings Logo.png">
+    <Resource Include="Resources\Images\Settings-Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\ToDo-Logo.png">

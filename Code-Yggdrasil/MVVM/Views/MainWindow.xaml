@@ -4,17 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Code_Yggdrasil"
+        xmlns:VuewModels="clr-namespace:Code_Yggdrasil.MVVM.ViewModels"
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True"
-        Background="Transparent"
-        Title="MainWindow" Height="580" Width="920">
+        Background="Transparent" ResizeMode="NoResize"
+        Title="MainWindow" Height="690" Width="1200">
 
+    <Window.DataContext>
+        <VuewModels:OverseerViewModel/>
+    </Window.DataContext>
+        
     <Window.Resources>
-        <LinearGradientBrush x:Key="BottomFadeMask"
-                             StartPoint="0.5,1" EndPoint=".5, 0">
-            <GradientStop Color="Black" Offset="-.5"/>
-            <GradientStop Color="Transparent" Offset=".8"/>
-        </LinearGradientBrush>
         
     </Window.Resources>
     
@@ -29,12 +29,13 @@
         <Grid Margin="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="62"/>
-                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="{Binding popUpBarWidth}"/>
+
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
             <!--    SIDE BAR    -->
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" x:Name="Holder">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="60"/>
@@ -42,7 +43,8 @@
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="120"/>
                 </Grid.RowDefinitions>
-
+                
+                
                 <!--    Back Border -->
                 <Border Grid.Row="0" Grid.RowSpan="5"
                         Background="{StaticResource Darker}" 
@@ -58,43 +60,95 @@
                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                             Height="Auto" Width="Auto">
 
-                    <RadioButton Style="{StaticResource MenuButtonTheme}" IsChecked="True">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Dashboard-Logo.png"/>
-                    </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource MenuButtonTheme}">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Project-Logo.png"/>
-                    </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource MenuButtonTheme}">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Calendar-Logo.png"/>
-                    </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource MenuButtonTheme}">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/ToDo-Logo.png"/>
-                    </RadioButton>
-                    
-                    <RadioButton Style="{StaticResource MenuButtonTheme}">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Asset-Logo.png"/>
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" IsChecked="True" CommandParameter="DashBoard">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Dashboard-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                     </RadioButton>
 
-                    <RadioButton Style="{StaticResource MenuButtonTheme}">
-                        <Image Height="25" Source="pack://application:,,,/Resources/Images/Profiles-Logo.png"/>
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" CommandParameter="Projects">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Project-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                     </RadioButton>
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" CommandParameter="Calendar">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Calendar-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" CommandParameter="ToDo">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/ToDo-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" CommandParameter="Assets">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Asset-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </RadioButton>
+
+                    <RadioButton Style="{StaticResource MenuButtonTheme}" CommandParameter="Users">
+                        <Rectangle Height="25" Width="25" 
+                                   Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}}">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Profiles-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </RadioButton>
+
+
                 </StackPanel>
             
                 
                 <!--    Pop up bar button-->
-                <ToggleButton Grid.Row="3" Style="{StaticResource PopupButtonTheme}">
-                    <Image Source="pack://application:,,,/Resources/Images/Pop-Up-Bar-Logo.png"/>
-                </ToggleButton>
+                <Button Grid.Row="3" Style="{StaticResource PopupButtonTheme}"
+                              Command="{Binding togglePopUpCommand}">
+                    <Rectangle Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                               Height="15">
+                        <Rectangle.OpacityMask>
+                            <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Pop-Up-Bar-Logo.png"/>
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                </Button>
+                
+                
                 <!--    Utility Buttons -->
                 <StackPanel Grid.Row="4">
                     <Button Height="Auto" Style="{StaticResource MenuButtonTheme-1}" Click="Minimise_Button_Click">
-                        <Image Height="40" Source="pack://application:,,,/Resources/Images/Minimise-Logo.png"/>
+                        <Rectangle Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                               Height="40" Width="40">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Minimise-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                     </Button>
+                    
+                    
                     <Button Height="Auto" Style="{StaticResource MenuButtonTheme-1}" Click="Off_Button_Click">
-                        <Image Height="40" Source="pack://application:,,,/Resources/Images/On-Off-Logo.png"/>
+                        <Rectangle Fill="{Binding Background, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}"
+                               Height="40" Width="40">
+                            <Rectangle.OpacityMask>
+                                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/On-Off-Logo.png"/>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
                     </Button>
                 </StackPanel>
                 
@@ -106,20 +160,30 @@
             <Grid Grid.Column="1">
                 <Border Background="{StaticResource Darker}"
                         BorderThickness="0 0 2 0" BorderBrush="{StaticResource Theme}">
-                    
+                    <ContentControl Margin="4" Content="{Binding CurrentPopUpPage}">
+                        
+                    </ContentControl>
                 </Border>
             </Grid>
             
             <!--    CONTENT PAGE    -->
-            <Grid Grid.Column="2" Margin="0 4 4 4">
-                <Border Background="{StaticResource Midtone}" CornerRadius="0 10 10 0"/>
-                <UserControl></UserControl>
+            <Grid Grid.Column="2" >
+                <!-- Background -->
+                <Border Background="{StaticResource Dark}" CornerRadius="0 10 10 0"/>
+                <ContentControl Content="{Binding CurrentContentPage}" Margin="0 0 5 0">
+                    
+                </ContentControl>
+                
+                <!--  Gradient  -->
+                <Border Background="{StaticResource Darkest}" Width="50" IsHitTestVisible="False"
+                        OpacityMask="{StaticResource LeftFadeMask}"
+                        HorizontalAlignment="Left"/>
             </Grid>
         </Grid>
 
         <!--    GRADIENT BOTTOM -->
         <Border Height="80" VerticalAlignment="Bottom" IsHitTestVisible="False"
-                Background="Black"
+                Background="{StaticResource Darkest}"
                 OpacityMask="{StaticResource BottomFadeMask}"
                 CornerRadius="0 0 10 10"
                 Margin="2"/>

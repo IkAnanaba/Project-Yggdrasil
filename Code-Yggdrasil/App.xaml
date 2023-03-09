@@ -7,7 +7,26 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources\ResourceDicts\GlobalThemes.xaml"/>
                 <ResourceDictionary Source="Resources\ResourceDicts\MainWindowResources.xaml"/>
+                
+                
             </ResourceDictionary.MergedDictionaries>
+
+            <LinearGradientBrush x:Key="BottomFadeMask"
+                             StartPoint="0.5,1" EndPoint=".5, 0">
+                <GradientStop Color="Black" Offset="-.5"/>
+                <GradientStop Color="Transparent" Offset=".8"/>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TopFadeMask"
+                             StartPoint="0.5,0" EndPoint=".5, 1">
+                <GradientStop Color="Black" Offset="-.5"/>
+                <GradientStop Color="Transparent" Offset=".8"/>
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="LeftFadeMask"
+                             StartPoint="0 ,0.5" EndPoint="1, .5">
+                <GradientStop Color="Black" Offset="-.5"/>
+                <GradientStop Color="Transparent" Offset=".8"/>
+            </LinearGradientBrush>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

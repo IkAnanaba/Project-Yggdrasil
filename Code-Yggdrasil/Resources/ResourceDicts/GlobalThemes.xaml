@@ -8,5 +8,36 @@
     <SolidColorBrush x:Key="Midtone" Color="#0E0E0E"/>
     <SolidColorBrush x:Key="Light" Color="#242424"/>
     <SolidColorBrush x:Key="Highlight" Color="#F2F2F2"/>
-    <SolidColorBrush x:Key="Theme" Color="#F60A20"/>
+    <SolidColorBrush x:Key="Theme" Color="#FF00FF"/>
+
+    <!-- F60A20 -->
+    <Style x:Key="StandardButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+
+                    <Grid>
+                        <Border x:Name="BackBorder" 
+                                CornerRadius="12" Background="{StaticResource Theme}" Opacity=".1"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
+
+                        <Border x:Name="Border" CornerRadius="10" BorderThickness="2" BorderBrush="{StaticResource Theme}" 
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BackBorder" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Highlight}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>
